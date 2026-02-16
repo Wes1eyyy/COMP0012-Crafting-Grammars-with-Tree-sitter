@@ -1,0 +1,62 @@
+==================
+Strategy without operand
+==================
+
+~~
+
+---
+
+(source_file
+  (ERROR))
+
+==================
+Strategy with wrong symbol
+==================
+
+%% expr
+
+---
+
+(source_file
+  (ERROR)
+  (identifier))
+
+==================
+Iteration missing transform
+==================
+
+@@ items >>
+
+---
+
+(source_file
+  (iteration_expression
+    collection: (identifier)
+    transform: (MISSING identifier)))
+
+==================
+Iteration missing collection
+==================
+
+@@ >> transform
+
+---
+
+(source_file
+  (iteration_expression
+    collection: (boolean
+      (MISSING "true"))
+    transform: (identifier)))
+
+==================
+Iteration missing arrow
+==================
+
+@@ items transform
+
+---
+
+(source_file
+  (ERROR
+    (identifier)
+    (identifier)))

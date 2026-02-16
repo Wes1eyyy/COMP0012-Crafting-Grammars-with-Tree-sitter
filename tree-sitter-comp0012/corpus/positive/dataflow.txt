@@ -1,0 +1,75 @@
+==================
+Basic dataflow
+==================
+
+42 => x
+
+---
+
+(source_file
+  (dataflow_definition
+    value: (number)
+    name: (identifier)))
+
+==================
+String dataflow
+==================
+
+"hello" => greeting
+
+---
+
+(source_file
+  (dataflow_definition
+    value: (string)
+    name: (identifier)))
+
+==================
+Expression dataflow
+==================
+
+1 + 2 => sum
+
+---
+
+(source_file
+  (dataflow_definition
+    value: (additive_expression
+      left: (number)
+      right: (number))
+    name: (identifier)))
+
+==================
+Complex expression dataflow
+==================
+
+a * b + c => result
+
+---
+
+(source_file
+  (dataflow_definition
+    value: (additive_expression
+      left: (multiplicative_expression
+        left: (identifier)
+        right: (identifier))
+      right: (identifier))
+    name: (identifier)))
+
+==================
+Nested dataflow with grouped expression
+==================
+
+(x + y) * z => product
+
+---
+
+(source_file
+  (dataflow_definition
+    value: (multiplicative_expression
+      left: (grouped_expression
+        (additive_expression
+          left: (identifier)
+          right: (identifier)))
+      right: (identifier))
+    name: (identifier)))

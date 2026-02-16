@@ -1,0 +1,75 @@
+==================
+Basic iteration
+==================
+
+@@ items >> transform
+
+---
+
+(source_file
+  (iteration_expression
+    collection: (identifier)
+    transform: (identifier)))
+
+==================
+Iteration over array literal
+==================
+
+@@ #[1, 2, 3] >> double
+
+---
+
+(source_file
+  (iteration_expression
+    collection: (array_literal
+      (number)
+      (number)
+      (number))
+    transform: (identifier)))
+
+==================
+Iteration with expression transform in parens
+==================
+
+@@ arr >> (x + 1)
+
+---
+
+(source_file
+  (iteration_expression
+    collection: (identifier)
+    transform: (grouped_expression
+      (additive_expression
+        left: (identifier)
+        right: (number)))))
+
+==================
+Iteration with function call
+==================
+
+@@ items >> process(item)
+
+---
+
+(source_file
+  (iteration_expression
+    collection: (identifier)
+    transform: (call_expression
+      function: (identifier)
+      (argument_list
+        (identifier)))))
+
+==================
+Nested iteration
+==================
+
+@@ matrix >> @@ row >> cell
+
+---
+
+(source_file
+  (iteration_expression
+    collection: (identifier)
+    transform: (iteration_expression
+      collection: (identifier)
+      transform: (identifier))))

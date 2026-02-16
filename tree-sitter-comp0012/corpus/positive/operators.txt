@@ -1,0 +1,287 @@
+==================
+Logical NOT
+==================
+
+!x
+
+---
+
+(source_file
+  (unary_expression
+    operand: (identifier)))
+
+==================
+Negation
+==================
+
+-x
+
+---
+
+(source_file
+  (unary_expression
+    operand: (identifier)))
+
+==================
+Double negation
+==================
+
+!!x
+
+---
+
+(source_file
+  (unary_expression
+    operand: (unary_expression
+      operand: (identifier))))
+
+==================
+Addition
+==================
+
+a + b
+
+---
+
+(source_file
+  (additive_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Subtraction
+==================
+
+a - b
+
+---
+
+(source_file
+  (additive_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Multiplication
+==================
+
+a * b
+
+---
+
+(source_file
+  (multiplicative_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Division
+==================
+
+a / b
+
+---
+
+(source_file
+  (multiplicative_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Modulo
+==================
+
+a % b
+
+---
+
+(source_file
+  (multiplicative_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Precedence test
+==================
+
+a + b * c
+
+---
+
+(source_file
+  (additive_expression
+    left: (identifier)
+    right: (multiplicative_expression
+      left: (identifier)
+      right: (identifier))))
+
+==================
+Left associativity
+==================
+
+a - b - c
+
+---
+
+(source_file
+  (additive_expression
+    left: (additive_expression
+      left: (identifier)
+      right: (identifier))
+    right: (identifier)))
+
+==================
+Grouped expression
+==================
+
+(a + b) * c
+
+---
+
+(source_file
+  (multiplicative_expression
+    left: (grouped_expression
+      (additive_expression
+        left: (identifier)
+        right: (identifier)))
+    right: (identifier)))
+
+==================
+Comparison equals
+==================
+
+a == b
+
+---
+
+(source_file
+  (comparison_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Comparison not equals
+==================
+
+a != b
+
+---
+
+(source_file
+  (comparison_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Comparison less than
+==================
+
+a < b
+
+---
+
+(source_file
+  (comparison_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Comparison greater than
+==================
+
+a > b
+
+---
+
+(source_file
+  (comparison_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Comparison less or equal
+==================
+
+a <= b
+
+---
+
+(source_file
+  (comparison_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Comparison greater or equal
+==================
+
+a >= b
+
+---
+
+(source_file
+  (comparison_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Logical AND
+==================
+
+a && b
+
+---
+
+(source_file
+  (logical_and_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Logical OR
+==================
+
+a || b
+
+---
+
+(source_file
+  (logical_or_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Logical precedence
+==================
+
+a || b && c
+
+---
+
+(source_file
+  (logical_or_expression
+    left: (identifier)
+    right: (logical_and_expression
+      left: (identifier)
+      right: (identifier))))
+
+==================
+Complex expression
+==================
+
+a + b * c > d && e || f
+
+---
+
+(source_file
+  (logical_or_expression
+    left: (logical_and_expression
+      left: (comparison_expression
+        left: (additive_expression
+          left: (identifier)
+          right: (multiplicative_expression
+            left: (identifier)
+            right: (identifier)))
+        right: (identifier))
+      right: (identifier))
+    right: (identifier)))

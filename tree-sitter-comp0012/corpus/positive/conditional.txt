@@ -1,0 +1,82 @@
+==================
+Basic conditional
+==================
+
+x ?? 1 :: 0
+
+---
+
+(source_file
+  (conditional_expression
+    condition: (identifier)
+    consequence: (number)
+    alternative: (number)))
+
+==================
+Conditional with comparison
+==================
+
+x > 0 ?? "positive" :: "negative"
+
+---
+
+(source_file
+  (conditional_expression
+    condition: (comparison_expression
+      left: (identifier)
+      right: (number))
+    consequence: (string)
+    alternative: (string)))
+
+==================
+Nested conditional in consequence
+==================
+
+a ?? b ?? 1 :: 2 :: 3
+
+---
+
+(source_file
+  (conditional_expression
+    condition: (identifier)
+    consequence: (conditional_expression
+      condition: (identifier)
+      consequence: (number)
+      alternative: (number))
+    alternative: (number)))
+
+==================
+Conditional with logical operators
+==================
+
+a && b ?? "both" :: "not both"
+
+---
+
+(source_file
+  (conditional_expression
+    condition: (logical_and_expression
+      left: (identifier)
+      right: (identifier))
+    consequence: (string)
+    alternative: (string)))
+
+==================
+Conditional with complex condition
+==================
+
+x > 0 && y > 0 ?? "positive" :: "not positive"
+
+---
+
+(source_file
+  (conditional_expression
+    condition: (logical_and_expression
+      left: (comparison_expression
+        left: (identifier)
+        right: (number))
+      right: (comparison_expression
+        left: (identifier)
+        right: (number)))
+    consequence: (string)
+    alternative: (string)))

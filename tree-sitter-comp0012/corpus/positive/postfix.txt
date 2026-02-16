@@ -1,0 +1,165 @@
+==================
+Array indexing
+==================
+
+arr[0]
+
+---
+
+(source_file
+  (index_expression
+    object: (identifier)
+    index: (number)))
+
+==================
+Index with expression
+==================
+
+arr[i + 1]
+
+---
+
+(source_file
+  (index_expression
+    object: (identifier)
+    index: (additive_expression
+      left: (identifier)
+      right: (number))))
+
+==================
+Function call no args
+==================
+
+func()
+
+---
+
+(source_file
+  (call_expression
+    function: (identifier)))
+
+==================
+Function call single arg
+==================
+
+func(x)
+
+---
+
+(source_file
+  (call_expression
+    function: (identifier)
+    (argument_list
+      (identifier))))
+
+==================
+Function call multiple args
+==================
+
+func(a, b, c)
+
+---
+
+(source_file
+  (call_expression
+    function: (identifier)
+    (argument_list
+      (identifier)
+      (identifier)
+      (identifier))))
+
+==================
+Member access
+==================
+
+obj.field
+
+---
+
+(source_file
+  (member_expression
+    object: (identifier)
+    member: (identifier)))
+
+==================
+Chained member access
+==================
+
+obj.field.subfield
+
+---
+
+(source_file
+  (member_expression
+    object: (member_expression
+      object: (identifier)
+      member: (identifier))
+    member: (identifier)))
+
+==================
+Method call
+==================
+
+obj.method()
+
+---
+
+(source_file
+  (call_expression
+    function: (member_expression
+      object: (identifier)
+      member: (identifier))))
+
+==================
+Method call with args
+==================
+
+obj.method(a, b)
+
+---
+
+(source_file
+  (call_expression
+    function: (member_expression
+      object: (identifier)
+      member: (identifier))
+    (argument_list
+      (identifier)
+      (identifier))))
+
+==================
+Complex postfix chain
+==================
+
+obj.method(x)[0].field
+
+---
+
+(source_file
+  (member_expression
+    object: (index_expression
+      object: (call_expression
+        function: (member_expression
+          object: (identifier)
+          member: (identifier))
+        (argument_list
+          (identifier)))
+      index: (number))
+    member: (identifier)))
+
+==================
+Call then index then slice
+==================
+
+func()[0][1:3]
+
+---
+
+(source_file
+  (slice_expression
+    object: (index_expression
+      object: (call_expression
+        function: (identifier))
+      index: (number))
+    start: (number)
+    end: (number)))

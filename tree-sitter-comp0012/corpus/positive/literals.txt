@@ -1,0 +1,98 @@
+==================
+Integer literal
+==================
+
+42
+
+---
+
+(source_file
+  (number))
+
+==================
+Decimal literal
+==================
+
+3.14
+
+---
+
+(source_file
+  (number))
+
+==================
+Double-quoted string
+==================
+
+"hello world"
+
+---
+
+(source_file
+  (string))
+
+==================
+Single-quoted string
+==================
+
+'hello world'
+
+---
+
+(source_file
+  (string))
+
+==================
+Boolean true
+==================
+
+true
+
+---
+
+(source_file
+  (boolean))
+
+==================
+Boolean false
+==================
+
+false
+
+---
+
+(source_file
+  (boolean))
+
+==================
+Identifier
+==================
+
+myVariable
+
+---
+
+(source_file
+  (identifier))
+
+==================
+Identifier with underscore
+==================
+
+_private_var
+
+---
+
+(source_file
+  (identifier))
+
+==================
+Identifier with numbers
+==================
+
+var123
+
+---
+
+(source_file
+  (identifier))

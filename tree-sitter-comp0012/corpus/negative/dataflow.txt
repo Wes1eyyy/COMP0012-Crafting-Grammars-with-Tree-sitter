@@ -1,0 +1,49 @@
+==================
+Missing target in dataflow
+==================
+
+42 =>
+
+---
+
+(source_file
+  (number)
+  (ERROR))
+
+==================
+Wrong direction operator is valid comparison
+==================
+
+x <= value
+
+---
+
+(source_file
+  (comparison_expression
+    left: (identifier)
+    right: (identifier)))
+
+==================
+Dataflow with number as target
+==================
+
+42 => 123
+
+---
+
+(source_file
+  (number)
+  (ERROR)
+  (number))
+
+==================
+Dataflow missing value
+==================
+
+=> x
+
+---
+
+(source_file
+  (ERROR)
+  (identifier))

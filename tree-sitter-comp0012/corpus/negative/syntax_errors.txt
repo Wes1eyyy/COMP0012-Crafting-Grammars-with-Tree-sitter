@@ -1,0 +1,169 @@
+==================
+Unclosed parenthesis
+==================
+
+(a + b
+
+---
+
+(source_file
+  (grouped_expression
+    (additive_expression
+      left: (identifier)
+      right: (identifier))
+    (MISSING ")")))
+
+==================
+Extra closing parenthesis
+==================
+
+a + b)
+
+---
+
+(source_file
+  (additive_expression
+    left: (identifier)
+    right: (identifier))
+  (ERROR))
+
+==================
+Mismatched brackets
+==================
+
+(a + b]
+
+---
+
+(source_file
+  (ERROR
+    (additive_expression
+      left: (identifier)
+      right: (identifier))))
+
+==================
+Two identifiers without operator
+==================
+
+a b
+
+---
+
+(source_file
+  (identifier)
+  (identifier))
+
+==================
+Trailing operator
+==================
+
+a +
+
+---
+
+(source_file
+  (additive_expression
+    left: (identifier)
+    right: (MISSING identifier)))
+
+==================
+Leading operator without operand
+==================
+
++ +
+
+---
+
+(source_file
+  (ERROR))
+
+==================
+Number followed by identifier is two tokens
+==================
+
+123abc
+
+---
+
+(source_file
+  (number)
+  (identifier))
+
+==================
+Unclosed string
+==================
+
+"hello
+
+---
+
+(source_file
+  (string
+    (MISSING """)))
+
+==================
+Function call missing closing paren
+==================
+
+func(a, b
+
+---
+
+(source_file
+  (call_expression
+    function: (identifier)
+    (argument_list
+      (identifier)
+      (identifier))
+    (MISSING ")")))
+
+==================
+Member access missing field
+==================
+
+obj.
+
+---
+
+(source_file
+  (member_expression
+    object: (identifier)
+    member: (MISSING identifier)))
+
+==================
+Empty member chain
+==================
+
+obj..field
+
+---
+
+(source_file
+  (member_expression
+    object: (identifier)
+    (ERROR)
+    member: (identifier)))
+
+==================
+Unclosed block
+==================
+
+{
+  42
+
+---
+
+(ERROR
+  (number))
+
+==================
+Unclosed comment
+==================
+
+/* unclosed
+
+---
+
+(source_file
+  (ERROR)
+  (identifier))

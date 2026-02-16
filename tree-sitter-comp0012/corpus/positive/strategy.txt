@@ -1,0 +1,92 @@
+==================
+Lazy strategy
+==================
+
+~~ expr
+
+---
+
+(source_file
+  (strategy_expression
+    operand: (identifier)))
+
+==================
+Greedy strategy
+==================
+
+$$ expr
+
+---
+
+(source_file
+  (strategy_expression
+    operand: (identifier)))
+
+==================
+Random strategy
+==================
+
+## expr
+
+---
+
+(source_file
+  (strategy_expression
+    operand: (identifier)))
+
+==================
+Chained strategies
+==================
+
+~~ $$ expr
+
+---
+
+(source_file
+  (strategy_expression
+    operand: (strategy_expression
+      operand: (identifier))))
+
+==================
+Strategy with expression
+==================
+
+~~ (a + b)
+
+---
+
+(source_file
+  (strategy_expression
+    operand: (grouped_expression
+      (additive_expression
+        left: (identifier)
+        right: (identifier)))))
+
+==================
+Strategy with function call
+==================
+
+$$ compute(x)
+
+---
+
+(source_file
+  (strategy_expression
+    operand: (call_expression
+      function: (identifier)
+      (argument_list
+        (identifier)))))
+
+==================
+Triple strategy chain
+==================
+
+~~ $$ ## value
+
+---
+
+(source_file
+  (strategy_expression
+    operand: (strategy_expression
+      operand: (strategy_expression
+        operand: (identifier)))))

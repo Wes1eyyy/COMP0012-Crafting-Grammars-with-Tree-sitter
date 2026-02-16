@@ -1,0 +1,54 @@
+==================
+Index missing closing bracket
+==================
+
+arr[0
+
+---
+
+(source_file
+  (identifier)
+  (ERROR
+    (number)))
+
+==================
+Index empty brackets
+==================
+
+arr[]
+
+---
+
+(source_file
+  (index_expression
+    object: (identifier)
+    index: (boolean
+      (MISSING "true"))))
+
+==================
+Slice missing object
+==================
+
+[1:3]
+
+---
+
+(source_file
+  (slice_expression
+    object: (boolean
+      (MISSING "true"))
+    start: (number)
+    end: (number)))
+
+==================
+Double colon at start of slice
+==================
+
+arr[:::]
+
+---
+
+(source_file
+  (slice_expression
+    object: (identifier)
+    (ERROR)))

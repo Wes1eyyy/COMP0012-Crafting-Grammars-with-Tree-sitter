@@ -1,0 +1,97 @@
+==================
+Empty array
+==================
+
+#[]
+
+---
+
+(source_file
+  (array_literal))
+
+==================
+Single element array
+==================
+
+#[1]
+
+---
+
+(source_file
+  (array_literal
+    (number)))
+
+==================
+Multiple elements
+==================
+
+#[1, 2, 3]
+
+---
+
+(source_file
+  (array_literal
+    (number)
+    (number)
+    (number)))
+
+==================
+Array with trailing comma
+==================
+
+#[1, 2, 3,]
+
+---
+
+(source_file
+  (array_literal
+    (number)
+    (number)
+    (number)))
+
+==================
+Nested arrays
+==================
+
+#[#[1, 2], #[3, 4]]
+
+---
+
+(source_file
+  (array_literal
+    (array_literal
+      (number)
+      (number))
+    (array_literal
+      (number)
+      (number))))
+
+==================
+Array with expressions
+==================
+
+#[a + b, c * d]
+
+---
+
+(source_file
+  (array_literal
+    (additive_expression
+      left: (identifier)
+      right: (identifier))
+    (multiplicative_expression
+      left: (identifier)
+      right: (identifier))))
+
+==================
+Array with strings
+==================
+
+#["hello", "world"]
+
+---
+
+(source_file
+  (array_literal
+    (string)
+    (string)))

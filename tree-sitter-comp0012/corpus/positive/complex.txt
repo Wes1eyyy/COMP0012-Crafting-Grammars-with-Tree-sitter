@@ -1,0 +1,129 @@
+==================
+Complex nested expression
+==================
+
+~~ (a + b) * c ?? d[0:5] :: #[1, 2, 3]
+
+---
+
+(source_file
+  (conditional_expression
+    condition: (multiplicative_expression
+      left: (strategy_expression
+        operand: (grouped_expression
+          (additive_expression
+            left: (identifier)
+            right: (identifier))))
+      right: (identifier))
+    consequence: (slice_expression
+      object: (identifier)
+      start: (number)
+      end: (number))
+    alternative: (array_literal
+      (number)
+      (number)
+      (number))))
+
+==================
+Dataflow with complex expression
+==================
+
+obj.method(a, b)[0] => result
+
+---
+
+(source_file
+  (dataflow_definition
+    value: (index_expression
+      object: (call_expression
+        function: (member_expression
+          object: (identifier)
+          member: (identifier))
+        (argument_list
+          (identifier)
+          (identifier)))
+      index: (number))
+    name: (identifier)))
+
+==================
+Iteration with conditional in parens
+==================
+
+@@ items >> (x > 0 ?? x :: 0)
+
+---
+
+(source_file
+  (iteration_expression
+    collection: (identifier)
+    transform: (grouped_expression
+      (conditional_expression
+        condition: (comparison_expression
+          left: (identifier)
+          right: (number))
+        consequence: (identifier)
+        alternative: (number)))))
+
+==================
+Map with nested structures
+==================
+
+#{
+  items: #[1, 2, 3],
+  config: #{enabled: true}
+}
+
+---
+
+(source_file
+  (map_literal
+    (map_entry
+      key: (identifier)
+      value: (array_literal
+        (number)
+        (number)
+        (number)))
+    (map_entry
+      key: (identifier)
+      value: (map_literal
+        (map_entry
+          key: (identifier)
+          value: (boolean))))))
+
+==================
+Strategy with iteration
+==================
+
+$$ @@ data >> process
+
+---
+
+(source_file
+  (strategy_expression
+    operand: (iteration_expression
+      collection: (identifier)
+      transform: (identifier))))
+
+==================
+Full expression chain
+==================
+
+~~ $$ obj.method(#[1, 2, 3])[0:2]
+
+---
+
+(source_file
+  (strategy_expression
+    operand: (strategy_expression
+      operand: (slice_expression
+        object: (call_expression
+          function: (member_expression
+            object: (identifier)
+            member: (identifier))
+          (argument_list
+            (array_literal
+              (number)
+              (number)
+              (number))))
+        start: (number)
+        end: (number)))))

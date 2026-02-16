@@ -1,0 +1,132 @@
+==================
+Array missing closing bracket
+==================
+
+#[1, 2, 3
+
+---
+
+(source_file
+  (array_literal
+    (number)
+    (number)
+    (number)
+    (MISSING "]")))
+
+==================
+Array missing opening hash
+==================
+
+[1, 2, 3]
+
+---
+
+(source_file
+  (ERROR)
+  (number)
+  (ERROR)
+  (number)
+  (ERROR)
+  (number)
+  (ERROR))
+
+==================
+Array double comma
+==================
+
+#[1,, 2]
+
+---
+
+(source_file
+  (array_literal
+    (number)
+    (ERROR)
+    (number)))
+
+==================
+Array missing comma
+==================
+
+#[1 2 3]
+
+---
+
+(source_file
+  (array_literal
+    (number)
+    (MISSING "]"))
+  (number)
+  (number)
+  (ERROR))
+
+==================
+Map missing closing brace
+==================
+
+#{a: 1
+
+---
+
+(source_file
+  (map_literal
+    (map_entry
+      key: (identifier)
+      value: (number))
+    (MISSING "}")))
+
+==================
+Map missing colon
+==================
+
+#{a 1}
+
+---
+
+(source_file
+  (map_literal
+    (ERROR
+      (identifier)
+      (number))))
+
+==================
+Map missing value
+==================
+
+#{a:}
+
+---
+
+(source_file
+  (map_literal
+    (map_entry
+      key: (identifier)
+      value: (boolean
+        (MISSING "true")))))
+
+==================
+Map missing key
+==================
+
+#{: 1}
+
+---
+
+(source_file
+  (map_literal
+    (ERROR
+      (number))))
+
+==================
+Map number as key
+==================
+
+#{123: value}
+
+---
+
+(source_file
+  (map_literal
+    (ERROR
+      (number)
+      (identifier))))

@@ -1,0 +1,110 @@
+==================
+Empty map
+==================
+
+#{}
+
+---
+
+(source_file
+  (map_literal))
+
+==================
+Single entry map
+==================
+
+#{name: "Alice"}
+
+---
+
+(source_file
+  (map_literal
+    (map_entry
+      key: (identifier)
+      value: (string))))
+
+==================
+Multiple entries
+==================
+
+#{name: "Alice", age: 30}
+
+---
+
+(source_file
+  (map_literal
+    (map_entry
+      key: (identifier)
+      value: (string))
+    (map_entry
+      key: (identifier)
+      value: (number))))
+
+==================
+Map with trailing comma
+==================
+
+#{a: 1, b: 2,}
+
+---
+
+(source_file
+  (map_literal
+    (map_entry
+      key: (identifier)
+      value: (number))
+    (map_entry
+      key: (identifier)
+      value: (number))))
+
+==================
+Map with string keys
+==================
+
+#{"key": "value"}
+
+---
+
+(source_file
+  (map_literal
+    (map_entry
+      key: (string)
+      value: (string))))
+
+==================
+Nested maps
+==================
+
+#{outer: #{inner: 42}}
+
+---
+
+(source_file
+  (map_literal
+    (map_entry
+      key: (identifier)
+      value: (map_literal
+        (map_entry
+          key: (identifier)
+          value: (number))))))
+
+==================
+Map with expression values
+==================
+
+#{sum: a + b, prod: x * y}
+
+---
+
+(source_file
+  (map_literal
+    (map_entry
+      key: (identifier)
+      value: (additive_expression
+        left: (identifier)
+        right: (identifier)))
+    (map_entry
+      key: (identifier)
+      value: (multiplicative_expression
+        left: (identifier)
+        right: (identifier)))))

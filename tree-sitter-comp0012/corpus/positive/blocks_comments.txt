@@ -1,0 +1,85 @@
+==================
+Single line comment
+==================
+
+// this is a comment
+
+---
+
+(source_file
+  (comment))
+
+==================
+Multi-line comment
+==================
+
+/* multi
+   line
+   comment */
+
+---
+
+(source_file
+  (comment))
+
+==================
+Comment with code
+==================
+
+x + y // inline comment
+
+---
+
+(source_file
+  (additive_expression
+    left: (identifier)
+    right: (identifier))
+  (comment))
+
+==================
+Empty block
+==================
+
+{}
+
+---
+
+(source_file
+  (block))
+
+==================
+Block with statements
+==================
+
+{
+  42 => x
+  x + 1
+}
+
+---
+
+(source_file
+  (block
+    (dataflow_definition
+      value: (number)
+      name: (identifier))
+    (additive_expression
+      left: (identifier)
+      right: (number))))
+
+==================
+Nested blocks
+==================
+
+{
+  {
+    1
+  }
+}
+
+---
+
+(source_file
+  (block
+    (block
+      (number))))
